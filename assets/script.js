@@ -1,0 +1,4 @@
+
+const menuBtn=document.querySelector('.menu-btn');const links=document.querySelector('.links');if(menuBtn&&links){menuBtn.addEventListener('click',()=>links.classList.toggle('open'))}
+const io=new IntersectionObserver((entries)=>entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('show')}),{threshold:.08});document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+const counters=document.querySelectorAll('[data-count]');const cio=new IntersectionObserver((entries)=>entries.forEach(e=>{if(!e.isIntersecting)return;const el=e.target;const target=Number(el.dataset.count);let start=0;const suffix=el.dataset.suffix||'';const dur=1100;const t0=performance.now();function tick(t){const p=Math.min(1,(t-t0)/dur);const val=Math.floor(target*(1-Math.pow(1-p,3)));el.textContent=val.toLocaleString()+suffix;if(p<1)requestAnimationFrame(tick)}requestAnimationFrame(tick);cio.unobserve(el)}),{threshold:.7});counters.forEach(c=>cio.observe(c));
